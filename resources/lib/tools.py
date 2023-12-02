@@ -250,7 +250,9 @@ def getProcessPID(process):
         return False
     OS = release()
     if OS['PLATFORM'] == 'Linux':
-        _syscmd = subprocess.Popen(['pidof', '-x', process], stdout=subprocess.PIPE)
+        ep = '-x'
+        if OS['ID'].lower() in ['libreelec', 'openelec']: ep = ''
+        _syscmd = subprocess.Popen(['pidof', ep, process], stdout=subprocess.PIPE)
         PID = _syscmd.stdout.read().strip()
         return PID if bool(PID) else False
     elif OS['PLATFORM'] == 'Windows':

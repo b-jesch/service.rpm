@@ -45,8 +45,9 @@ def setProperty(key, value):
 
 
 def getProperty(key):
-    return xbmcgui.Window(10000).getProperty(str(key))
-
+    if xbmcgui.Window(10000).getProperty(key) == 'True': return True
+    elif xbmcgui.Window(10000).getProperty(key) == 'False': return False
+    else: return xbmcgui.Window(10000).getProperty(key)
 
 def str2bool(value):
     return True if value.lower() == 'true' else False
@@ -58,7 +59,6 @@ class Monitor(xbmc.Monitor):
         self.settingsChanged = False
         self.hasPVR = False
         self.waitForShutdown = True
-        self.observe = False
         self.nextTimer = 0
         self.nextEPG = 0
 

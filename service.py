@@ -69,11 +69,12 @@ class EpgThread(threading.Thread):
 
 
 def countDown():
-    if Mon.setting['server_mode'] or not Mon.observe:
+    if Mon.setting['server_mode']:
         pbar = ProgressBar(loc(30030), loc(30011).format(addonname), reverse=True)
     else:
         pbar = ProgressBar(loc(30010), loc(30011).format(addonname),
-                           Mon.setting['notification_time'], Mon.setting['notification_time'], reverse=True)
+                           duration=Mon.setting['notification_time'], steps=Mon.setting['notification_time'],
+                           reverse=True)
     return not pbar.show_progress()
 
 
@@ -225,7 +226,7 @@ def service():
 
     if flags & (isREC | isEPG | isATF):
         Mon.waitForShutdown = True
-        Mon.observe = True
+        setProperty('observe', True)
 
     # start EPG grabber threads
 
@@ -255,19 +256,19 @@ def service():
             xbmc.sleep(1000)
 
             # check for user activity and power off required by user
-            if str2bool(getProperty('poweroff')):
+            if getProperty('poweroff'):
                 log('Shutdown required by user')
                 Mon.waitForShutdown = True
-                Mon.observe = False
+                setProperty('observe', False)
                 setProperty('poweroff', False)
                 break
 
             if xbmc.getGlobalIdleTime() < idle and Mon.waitForShutdown:
-                if not Mon.setting['server_mode'] and not getTimeFrameStatus() and Mon.setting['ignore_useractivity']:
+                if not Mon.setting['server_mode'] and not getTimeFrameStatus():
                     log('User activity detected, revoke shutdown')
                     Mon.waitForShutdown = False
                 else:
-                    log('Ignore/reset user activity due settings')
+                    log('Ignore user activity due settings')
                     Mon.waitForShutdown = True
 
             walker += 1
@@ -305,7 +306,7 @@ def service():
                 if Mon.setting['shutdown_method'] == 0 or osv['PLATFORM'] == 'Windows':
                     xbmc.shutdown()
 
-            if not Mon.observe:
+            if not getProperty('observe'):
                 if flags & isREC:
                     notify(loc(30015), loc(30020), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Recording in progress'
                 elif flags & isEPG:
@@ -316,7 +317,7 @@ def service():
                     notify(loc(30015), loc(30023), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Network active'
                 elif flags & isATF:
                     notify(loc(30015), loc(30033), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Time Frame active'
-                Mon.observe = True
+                setProperty('observe', True)
 
         walker = 0
 

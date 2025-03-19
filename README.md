@@ -4,14 +4,12 @@ service.rpm
 PVR 'Recording- & Power Manager NG²' for Kodi. This addon turns your Kodi on a Linux installation (pure Linux, Open-/LibreELEC) 
 into a full featured video recorder (TV server and TV card required).
 
-This addon handles power management for current active recordings and wakeup procedures for future schedules using 
-the JSON-RPC-Interface of Kodi. The addon starts and shut down the HTPC if a recording needs to be scheduled.
+This addon handles power management for current active recordings and wakeup procedures for future schedules using the JSON-RPC-Interface of Kodi. The addon starts and shut down the HTPC if a recording is scheduled.
 
-The new server mode allows the use of a Kodi installation as a pure recording and media server. The server can be woken 
-up e.g. via WOL and makes its resources available until no more process, network or recording tasks are active. After that, 
-the system shuts down. If user activity is detected during this time, the addon switches to client mode.
+The new server mode allows the use of a Kodi installation as a pure recording and media server. The server is woken e.g. via WOL and makes its resources available until no more process, network or recording tasks are active. After that the system shuts down. If the user is cancelling the shut down, the addon switches to client mode. Shutdown needs then a special 
+action/key/button on remote (see below). A defined time frame can also be used to disable the shutdown within this time frame via addon. 
 
-The addon starts the system periodically on a user defined cycle and time for e.g. EPG-updates too if there is a longer 
+The addon also starts the system periodically on a user defined cycle and time for e.g. EPG-updates if there is a longer 
 inactivity time of the system or user. To collect the individual EPG data the script "epggrab_ext.sh" can be adapted to your needs.
 
 
@@ -107,7 +105,8 @@ and change this to:
             <visible>System.CanPowerDown + System.HasAddon(service.rpm)</visible>
         </item>
 
-Don’t forget to store. Remember that you have to repeat this when the skin has updated.
+Don’t forget to store. Remember that you have to repeat this when the skin has updated. The skin "Estuary Mod V2" has this 
+already implemented.
 
 Please send Comments and Bugreports to birger.jesch@gmail.com
 

@@ -255,7 +255,7 @@ def service():
                 cycle = Mon.setting['sm_idletime'] if Mon.setting['server_mode'] and not Mon.setting['main_activity'] and not (flags & isATF) else Mon.setting['um_idletime']
 
             idle = xbmc.getGlobalIdleTime()
-            log('System is {} secs idle'.format(idle))
+            # log('System is {} secs idle'.format(idle))
             xbmc.sleep(2000)
 
             # check for user activity and power off required by user

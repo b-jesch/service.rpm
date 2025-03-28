@@ -6,8 +6,7 @@ into a full featured video recorder (TV server and TV card required).
 
 This addon handles power management for current active recordings and wakeup procedures for future schedules using the JSON-RPC-Interface of Kodi. The addon starts and shut down the HTPC if a recording is scheduled.
 
-The new server mode allows the use of a Kodi installation as a pure recording and media server. The server is woken e.g. via WOL and makes its resources available until no more process, network or recording tasks are active. After that the system shuts down. If the user is cancelling the shut down, the addon switches to client mode. Shutdown needs then a special 
-action/key/button on remote (see below). A defined time frame can also be used to disable the shutdown within this time frame via addon. 
+The new server mode allows the use of a Kodi installation as a pure recording and media server. The server is woken e.g. via WOL and makes its resources available until no more process, network or recording tasks are active. After that the system shuts down. If the user is cancelling the shut down process, the addon initiate a new idle time process. A defined time frame can also be used to extend the idle time until shutdown. 
 
 The addon also starts the system periodically on a user defined cycle and time for e.g. EPG-updates if there is a longer 
 inactivity time of the system or user. To collect the individual EPG data the script "epggrab_ext.sh" can be adapted to your needs.

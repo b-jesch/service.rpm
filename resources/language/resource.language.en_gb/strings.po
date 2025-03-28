@@ -38,7 +38,7 @@ msgid "This is the »{}« addon. It's important to set me up and configure prope
 msgstr ""
 
 msgctxt "#30003"
-msgid "Display countdown of shutdown confirmation for"
+msgid "Duration of Countdown for Shutdown"
 msgstr ""
 
 msgctxt "#30004"
@@ -473,6 +473,30 @@ msgstr ""
 
 msgctxt "#30118"
 msgid "10 min"
+msgstr ""
+
+msgctxt "#30119"
+msgid "15 min"
+msgstr ""
+
+msgctxt "#30120"
+msgid "30 min"
+msgstr ""
+
+msgctxt "#30121"
+msgid "45 min"
+msgstr ""
+
+msgctxt "#30122"
+msgid "60 min"
+msgstr ""
+
+msgctxt "#30123"
+msgid "90 min"
+msgstr ""
+
+msgctxt "#30124"
+msgid "120 min"
 msgstr ""
 
 msgctxt "#30200"

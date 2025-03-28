@@ -32,7 +32,7 @@ LOCAL_TIME_FORMAT = '{} - {}'.format(xbmc.getRegion('dateshort'), xbmc.getRegion
 # binary Flags
 
 isPWR = 0b100000     # Poweroff requested
-isATF = 0b010000     # Time Frame is active
+isATF = 0b010000     # active Time Frame
 isNET = 0b001000     # Network is active
 isPRG = 0b000100     # Processes are active
 isREC = 0b000010     # Recording is or becomes active
@@ -48,6 +48,9 @@ def getProperty(key):
     if xbmcgui.Window(10000).getProperty(key) == 'True': return True
     elif xbmcgui.Window(10000).getProperty(key) == 'False': return False
     else: return xbmcgui.Window(10000).getProperty(key)
+
+def clearProperty(key):
+    xbmcgui.Window(10000).clearProperty(key)
 
 def str2bool(value):
     return True if value.lower() == 'true' else False

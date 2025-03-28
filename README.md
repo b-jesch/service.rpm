@@ -67,7 +67,7 @@ Installation
 
 
 Y.A.R.D.2
-_________
+---------
 
 You have to make sure that your system knows the path to the yard2wakeup executable. Insert this line into the .profile file in your user folder:
 
@@ -112,3 +112,8 @@ Please send Comments and Bugreports to birger.jesch@gmail.com
 
 HINT: If your OS is OpenELEC/LibreELEC you have to turn off ‘Shutdown requires admin privileges’ as OpenELEC/LibreELEC doesn’t need sudo! 
 This should be done automatically by the addon in most cases.
+
+History
+-------
+
+- 3.1.0+matrix 28.03.2025: komplete rewrite of the addon

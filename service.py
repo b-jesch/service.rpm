@@ -22,8 +22,6 @@ if osv.get('ARCH', 'not detected') not in ['i386', 'i686', 'x86_64']:
 SHUTDOWN_CMD = xbmcvfs.translatePath(os.path.join(addonpath, 'resources', 'lib', 'shutdown.sh'))
 EXTGRABBER = xbmcvfs.translatePath(os.path.join(addonpath, 'resources', 'lib', 'epggrab_ext.sh'))
 
-DEFAULT_CYCLE = 15
-
 # set permissions for SHUTDOWN_CMD/EXTGRABBER, required after installation or update
 
 _sts = os.stat(SHUTDOWN_CMD).st_mode
@@ -35,9 +33,9 @@ Mon = Monitor()
 Mon.settings = addon_settings
 Mon.getAddonSettings()
 
-setProperty('poweroff', False)
-setProperty('observe', False)
-setProperty('epg_exec_done', False)
+setProperty('poweroff', 'False')
+setProperty('observe', 'False')
+setProperty('epg_exec_done', 'False')
 
 osv = release()
 log('OS ID is {} {}'.format(osv['ID'], osv['VERSION_ID']), xbmc.LOGINFO)
@@ -64,19 +62,18 @@ class EpgThread(threading.Thread):
             copy2Socket(Mon.setting['epg_file'], Mon.setting['epg_socket'])
         else:
             log('wrong or missing threading parameter: {}'.format(self.mode))
-        setProperty('epg_exec_done', True)
+        setProperty('epg_exec_done', 'True')
         log('EPG thread took {} secs'.format(int(time.time() - initialize)))
 
 
-def countDown():
-    if Mon.setting['server_mode']:
+def countDown(flags):
+    if Mon.setting['server_mode'] or flags & isATF:
         pbar = ProgressBar(loc(30030), loc(30011).format(addonname), reverse=True)
     else:
         pbar = ProgressBar(loc(30010), loc(30011).format(addonname),
                            duration=Mon.setting['notification_time'], steps=Mon.setting['notification_time'],
                            reverse=True)
     return not pbar.show_progress()
-
 
 def copy2Socket(source, tvhsocket):
     if xbmcvfs.exists(source) and xbmcvfs.exists(tvhsocket):
@@ -104,7 +101,6 @@ def copy2Socket(source, tvhsocket):
         log('Source file or socket doesn\'t exist. Check your settings', xbmc.LOGERROR)
     return False
 
-
 def runExtEpg(script, tvhsocket):
     if osv['PLATFORM'] == 'Linux' and os.path.isfile(script) and os.path.isfile(tvhsocket):
         try:
@@ -115,7 +111,6 @@ def runExtEpg(script, tvhsocket):
                 xbmc.sleep(1000)
         except subprocess.SubprocessError as e:
             log('Could not start external script: {}'.format(e), xbmc.LOGERROR)
-
 
 def getPvrStatus():
 
@@ -144,7 +139,6 @@ def getPvrStatus():
                 break
     return isUSR
 
-
 def getEpgStatus():
 
     # Check for EPG update
@@ -164,7 +158,6 @@ def getEpgStatus():
             Mon.nextEPG += int(Mon.setting['epgtimer_interval'] * 86400)
     return isUSR
 
-
 def getProcessStatus():
 
     # check for running processes
@@ -175,7 +168,6 @@ def getProcessStatus():
             if getProcessPID(proc.strip()):
                 return isPRG
     return isUSR
-
 
 def getNetworkStatus():
 
@@ -188,7 +180,6 @@ def getNetworkStatus():
                 return isNET
     return isUSR
 
-
 def getTimeFrameStatus():
 
     # check for active time frame
@@ -199,12 +190,10 @@ def getTimeFrameStatus():
             return isATF
     return isUSR
 
-
 def getPwrStatus():
     if Mon.waitForShutdown:
         return isPWR
     return isUSR
-
 
 def getStatusFlags(flags):
 
@@ -214,19 +203,30 @@ def getStatusFlags(flags):
         log('Status changed: {:06b} (PWR/ATF/NET/PRG/REC/EPG)'.format(_flags), xbmc.LOGINFO)
     return _flags
 
+def checkShutdownProperty():
+    # check for user activity and power off required by user
+    if getProperty('poweroff'):
+        Mon.waitForShutdown = True
+        setProperty('poweroff', 'False')
+        setProperty('observe', 'False')
+        log('Shutdown required by user')
+        return True
+    return False
 
 def service():
 
     flags = getStatusFlags(isUSR)
-    Mon.waitForShutdown = True if Mon.setting['server_mode'] else False
+    # setProperty('observe', False)
+
+    # Mon.waitForShutdown = True if Mon.setting['server_mode'] else False
 
     # This is the initial startup after boot, if flags isREC | isEPG are set, a recording
     # or EPG update is immediately started. set 'poweroff' to true, also set 'observe' to true
     # avoiding notifications on initial startup
 
-    if flags & (isREC | isEPG | isATF):
-        Mon.waitForShutdown = True
-        setProperty('observe', True)
+    if flags & (isREC | isEPG):
+        setProperty('poweroff', 'True')
+        setProperty('observe', 'True')
 
     # start EPG grabber threads
 
@@ -236,12 +236,14 @@ def service():
 
     # ::MAIN LOOP::
 
-    walker = 0
-    cycle = Mon.setting['idle_time'] if Mon.setting['server_mode'] else DEFAULT_CYCLE
+    idle = 0
+    cycle = Mon.setting['sm_idletime'] if Mon.setting['server_mode'] and not Mon.setting['main_activity'] and not (flags & isATF) else Mon.setting['um_idletime']
 
     while not Mon.abortRequested():
 
-        while walker < cycle:
+        flags = getStatusFlags(flags)
+
+        while idle < cycle:
             if Mon.abortRequested():
                 break
 
@@ -249,37 +251,32 @@ def service():
                 Mon.getAddonSettings()
                 Mon.settingsChanged = False
 
-                # define check interval depending on addon mode
-                cycle = Mon.setting['idle_time'] if Mon.setting['server_mode'] else DEFAULT_CYCLE
+                # define max idle time depending on addon mode
+                cycle = Mon.setting['sm_idletime'] if Mon.setting['server_mode'] and not Mon.setting['main_activity'] and not (flags & isATF) else Mon.setting['um_idletime']
 
             idle = xbmc.getGlobalIdleTime()
-            xbmc.sleep(1000)
+            log('System is {} secs idle'.format(idle))
+            xbmc.sleep(2000)
 
             # check for user activity and power off required by user
-            if getProperty('poweroff'):
-                log('Shutdown required by user')
-                Mon.waitForShutdown = True
-                setProperty('observe', False)
-                setProperty('poweroff', False)
-                break
+            if checkShutdownProperty(): break
 
-            if xbmc.getGlobalIdleTime() < idle and Mon.waitForShutdown:
-                if not Mon.setting['server_mode'] and not getTimeFrameStatus():
-                    log('User activity detected, revoke shutdown')
-                    Mon.waitForShutdown = False
-                else:
-                    log('Ignore user activity due settings')
-                    Mon.waitForShutdown = True
+            if xbmc.getGlobalIdleTime() < idle:
+                log('User activity detected, reset idle time')
+                Mon.waitForShutdown = False
+                setProperty('observe', 'False')
 
-            walker += 1
+        Mon.waitForShutdown = True
 
         flags = getStatusFlags(flags)
         if flags & isPWR:
 
-            if not flags & (isREC | isEPG | isPRG | isNET | isATF):
+            if not flags & (isREC | isEPG | isPRG | isNET):
 
-                if not countDown():
+                if not countDown(flags):
                     Mon.waitForShutdown = False
+                    setProperty('poweroff', 'False')
+                    idle = 0
                     continue
 
                 # power off
@@ -317,9 +314,18 @@ def service():
                     notify(loc(30015), loc(30023), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Network active'
                 elif flags & isATF:
                     notify(loc(30015), loc(30033), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Time Frame active'
-                setProperty('observe', True)
+                setProperty('observe', 'True')
 
-        walker = 0
+        walker = 20
+
+        while walker > 0:
+            if checkShutdownProperty(): break
+            elif xbmc.getGlobalIdleTime() < idle:
+                idle = 0
+                break
+
+            xbmc.sleep(2000)
+            walker -= 1
 
 
 if __name__ == '__main__':

@@ -38,8 +38,8 @@ msgid "This is the »{}« addon. It's important to set me up and configure prope
 msgstr "Das ist eine Meldung des »{}« Addons. Vor meiner Nutzung bitte korrekt aufsetzen und konfigurieren. Dazu die README.md in diesem ZIP lesen oder 'https://github.com/b-jesch/service.rpm' besuchen."
 
 msgctxt "#30003"
-msgid "Display countdown of shutdown confirmation for"
-msgstr "Anzeigedauer für Abschalthinweis anzeigen für"
+msgid "Duration of Countdown for Shutdown"
+msgstr "Dauer des Countdowns für die Abschaltung"
 
 msgctxt "#30004"
 msgid "Max delay until PVR is active"
@@ -474,6 +474,30 @@ msgstr "5 Min"
 msgctxt "#30118"
 msgid "10 min"
 msgstr "10 Min"
+
+msgctxt "#30119"
+msgid "15 min"
+msgstr "15 Min"
+
+msgctxt "#30120"
+msgid "30 min"
+msgstr "30 Min"
+
+msgctxt "#30121"
+msgid "45 min"
+msgstr "45 Min"
+
+msgctxt "#30122"
+msgid "60 min"
+msgstr "60 Min"
+
+msgctxt "#30123"
+msgid "90 min"
+msgstr "90 Min"
+
+msgctxt "#30124"
+msgid "120 min"
+msgstr "120 Min"
 
 msgctxt "#30200"
 msgid "Booting time from system switch on until Kodi has initialized"

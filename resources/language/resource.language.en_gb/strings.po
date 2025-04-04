@@ -499,6 +499,18 @@ msgctxt "#30124"
 msgid "120 min"
 msgstr ""
 
+msgctxt "#30125"
+msgid "150 min"
+msgstr ""
+
+msgctxt "#30126"
+msgid "180 min"
+msgstr ""
+
+msgctxt "#30127"
+msgid "240 min"
+msgstr ""
+
 msgctxt "#30200"
 msgid "Booting time from system switch on until Kodi has initialized"
 msgstr ""

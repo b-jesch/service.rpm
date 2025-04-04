@@ -79,18 +79,21 @@
 				</setting>
 				<setting help="30228" id="um_idletime" label="30028" type="integer">
 					<level>0</level>
-					<default>3600</default>
+					<default>9000</default>
 					<constraints>
 						<options>
 
 							<option label="30117">300</option>
 							<option label="30118">600</option>
-							<option label="30119">600</option>
+							<option label="30119">900</option>
 							<option label="30120">1800</option>
 							<option label="30121">2400</option>
 							<option label="30122">3600</option>
 							<option label="30123">5400</option>
 							<option label="30124">7200</option>
+							<option label="30125">9000</option>
+							<option label="30126">10800</option>
+							<option label="30127">14400</option>
 						</options>
 					</constraints>
 					<dependencies>

@@ -1,8 +1,3 @@
-import xbmc
-
-from resources.lib.settings import *
-from resources.lib.tools import *
-
 import time
 import xbmcvfs
 import socket

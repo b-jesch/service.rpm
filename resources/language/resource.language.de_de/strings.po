@@ -488,28 +488,28 @@ msgid "45 min"
 msgstr "45 Min"
 
 msgctxt "#30122"
-msgid "60 min"
-msgstr "60 Min"
+msgid "1 hrs"
+msgstr "1 Std"
 
 msgctxt "#30123"
 msgid "90 min"
 msgstr "90 Min"
 
 msgctxt "#30124"
-msgid "120 min"
-msgstr "120 Min"
+msgid "2 hrs"
+msgstr "2 Std"
 
 msgctxt "#30125"
 msgid "150 min"
 msgstr "150 Min"
 
 msgctxt "#30126"
-msgid "180 min"
-msgstr "180 Min"
+msgid "3 hrs"
+msgstr "3 Std"
 
 msgctxt "#30127"
-msgid "240 min"
-msgstr "240 Min"
+msgid "4 hrs"
+msgstr "4 Std"
 
 msgctxt "#30200"
 msgid "Booting time from system switch on until Kodi has initialized"
@@ -544,12 +544,12 @@ msgid "Use Server mode if system is wake up for Recordings or as server for othe
 msgstr "Wenn das System vorwiegend für TV-Aufnahmen oder als Videoserver für andere Clients dient, den Servermodus benutzen"
 
 msgctxt "#30228"
-msgid "Idle time if server performs a shutdown"
-msgstr "Inaktivitätszeit, nach der ein Herunterfahren/Ausschalten ausgelöst wird"
+msgid "Idle time until server performs a shutdown"
+msgstr "Inaktivitätszeit für den Servermodus, nach der ein Herunterfahren/Ausschalten ausgelöst wird"
 
 msgctxt "#30231"
-msgid "Enable a main activity time frame. The system is not shut down within this time frame."
-msgstr "Zeitrahmen für die Hauptnutzungszeit erlauben. Innerhalb dieses Zeitrahmens wird das System nicht heruntergefahren."
+msgid "Enable a main activity time frame. The system uses the user idle time then within this time frame."
+msgstr "Zeitrahmen für die Hauptnutzungszeit. Innerhalb dieses Zeitrahmens wird die Inaktivitätszeit fur den Nutzermodus benutzt."
 
 msgctxt "#30234"
 msgid "Check this if you want to monitoring network activity"

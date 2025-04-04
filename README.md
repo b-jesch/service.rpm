@@ -109,10 +109,10 @@ already implemented.
 
 Please send Comments and Bugreports to birger.jesch@gmail.com
 
-HINT: If your OS is OpenELEC/LibreELEC you have to turn off ‘Shutdown requires admin privileges’ as OpenELEC/LibreELEC doesn’t need sudo! 
+HINT: If your OS is CoreELEC/LibreELEC you have to turn off ‘Shutdown requires admin privileges’ as CoreELEC/LibreELEC doesn’t need sudo! 
 This should be done automatically by the addon in most cases.
 
 History
 -------
-
+- 3.1.0+matrix.1 04.04.2025: extend idle time frame in user mode up to 4 hrs
 - 3.1.0+matrix 28.03.2025: komplete rewrite of the addon

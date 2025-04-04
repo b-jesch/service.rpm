@@ -488,7 +488,7 @@ msgid "45 min"
 msgstr ""
 
 msgctxt "#30122"
-msgid "60 min"
+msgid "1 hrs"
 msgstr ""
 
 msgctxt "#30123"
@@ -496,7 +496,7 @@ msgid "90 min"
 msgstr ""
 
 msgctxt "#30124"
-msgid "120 min"
+msgid "2 hrs"
 msgstr ""
 
 msgctxt "#30125"
@@ -504,11 +504,11 @@ msgid "150 min"
 msgstr ""
 
 msgctxt "#30126"
-msgid "180 min"
+msgid "3 hrs"
 msgstr ""
 
 msgctxt "#30127"
-msgid "240 min"
+msgid "4 hrs"
 msgstr ""
 
 msgctxt "#30200"
@@ -544,11 +544,11 @@ msgid "Use Server mode if system is wake up for Recordings or as server for othe
 msgstr ""
 
 msgctxt "#30228"
-msgid "Idle time if server performs a shutdown"
+msgid "Idle time until server performs a shutdown"
 msgstr ""
 
 msgctxt "#30231"
-msgid "Enable a main activity time frame. The system is not shut down within this time frame."
+msgid "Enable a main activity time frame. The system uses the user idle time then within this time frame."
 msgstr ""
 
 msgctxt "#30234"

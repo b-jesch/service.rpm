@@ -82,7 +82,6 @@
 					<default>9000</default>
 					<constraints>
 						<options>
-
 							<option label="30117">300</option>
 							<option label="30118">600</option>
 							<option label="30119">900</option>
@@ -94,6 +93,8 @@
 							<option label="30125">9000</option>
 							<option label="30126">10800</option>
 							<option label="30127">14400</option>
+							<option label="30128">18000</option>
+							<option label="30129">21600</option>
 						</options>
 					</constraints>
 					<dependencies>

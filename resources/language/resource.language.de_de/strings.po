@@ -511,6 +511,14 @@ msgctxt "#30127"
 msgid "4 hrs"
 msgstr "4 Std"
 
+msgctxt "#30128"
+msgid "5 hrs"
+msgstr "5 Std"
+
+msgctxt "#30129"
+msgid "6 hrs"
+msgstr "6 Std"
+
 msgctxt "#30200"
 msgid "Booting time from system switch on until Kodi has initialized"
 msgstr "Bootzeit ab dem Zeitpunkt des Einschaltens bis zur vollständigen Initialisation von Kodi"

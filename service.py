@@ -3,6 +3,8 @@ import xbmcvfs
 import socket
 import threading
 import stat
+from resources.lib.tools import *
+from resources.lib.settings import addon_settings
 
 osv = release()
 if osv.get('ARCH', 'not detected') not in ['i386', 'i686', 'x86_64']:

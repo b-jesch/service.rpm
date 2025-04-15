@@ -253,7 +253,7 @@ def service():
 
             idle = xbmc.getGlobalIdleTime()
             # log('System is {} secs idle'.format(idle))
-            xbmc.sleep(2000)
+            Mon.waitForAbort(2)
 
             # check for user activity and power off required by user
             if checkShutdownProperty(): break
@@ -289,7 +289,6 @@ def service():
                     if Mon.setting['show_next_sched'] and not Mon.setting['server_mode']:
                         notify(loc(30040), loc(30014))
 
-                xbmc.sleep(5000)
                 log('set RTC to {}'.format(_t))
                 if osv['PLATFORM'] == 'Linux':
                     sudo = 'sudo ' if Mon.setting['sudo'] else ''
@@ -316,12 +315,12 @@ def service():
         walker = 20
 
         while walker > 0:
-            if checkShutdownProperty(): break
+            if checkShutdownProperty() or Mon.abortRequested(): break
             elif xbmc.getGlobalIdleTime() < idle:
                 idle = 0
                 break
 
-            xbmc.sleep(2000)
+            Mon.waitForAbort(2)
             walker -= 1
 
 

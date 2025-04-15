@@ -452,12 +452,12 @@ msgid "45 sec"
 msgstr "45 Sek"
 
 msgctxt "#30113"
-msgid "60 sec"
-msgstr "60 Sek"
+msgid "1 min"
+msgstr "1 Min"
 
 msgctxt "#30114"
-msgid "90 sec"
-msgstr "90 Sek"
+msgid "1 min 30 sec"
+msgstr "1 Min 30 Sek"
 
 msgctxt "#30115"
 msgid "2 min"
@@ -492,16 +492,16 @@ msgid "1 hrs"
 msgstr "1 Std"
 
 msgctxt "#30123"
-msgid "90 min"
-msgstr "90 Min"
+msgid "1 hrs 30 min"
+msgstr "1 Std 30 Min"
 
 msgctxt "#30124"
 msgid "2 hrs"
 msgstr "2 Std"
 
 msgctxt "#30125"
-msgid "150 min"
-msgstr "150 Min"
+msgid "2 hrs 30 min"
+msgstr "2 Std 30 Min"
 
 msgctxt "#30126"
 msgid "3 hrs"

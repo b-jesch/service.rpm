@@ -259,7 +259,7 @@ def service():
             if checkShutdownProperty(): break
 
             if xbmc.getGlobalIdleTime() < idle:
-                log('User activity detected, reset idle time')
+                log('User activity detected, was idle for {} secs'.format(idle))
                 Mon.waitForShutdown = False
                 setProperty('observe', 'False')
 

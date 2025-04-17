@@ -23,5 +23,6 @@ addon_settings = dict({'pvr_delay': INT,
                        'epg_mode': INT,
                        'epg_script': STRING,
                        'epg_file': STRING,
-                       'epg_socket': STRING
+                       'epg_socket': STRING,
+                       'check_audioplayer': BOOL
                        })

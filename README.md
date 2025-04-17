@@ -114,5 +114,6 @@ This should be done automatically by the addon in most cases.
 
 History
 -------
+- 3.2.0+matrix 17.04.2025: observing activity of Kodi audio player
 - 3.1.0+matrix.1 04.04.2025: extend idle time frame in user mode up to 4 hrs
 - 3.1.0+matrix 28.03.2025: komplete rewrite of the addon

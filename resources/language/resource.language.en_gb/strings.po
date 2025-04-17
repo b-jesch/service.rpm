@@ -209,7 +209,15 @@ msgctxt "#30046"
 msgid "Your hardware architecture does not seem to be compatible with the requirements of this addon. The addon is therefore disabled."
 msgstr ""
 
-#empty strings from id 30047 t0 30049
+msgctxt "#30047"
+msgid "Audio Player is active"
+msgstr ""
+
+msgctxt "#30048"
+msgid "Check for active Audio Player"
+msgstr ""
+
+#empty string 30049
 
 msgctxt "#30050"
 msgid "General"
@@ -578,6 +586,10 @@ msgstr ""
 msgctxt "#30243"
 msgid "This will ignore any user activity while a main activity time frame has set and is active. A shutdown will performed after the time frame has ended if there is no activity after that."
 msgstr ""
+
+msgctxt "#30248"
+msgid "Check this if you want to monitoring the Kodi audio player"
+msgstr "Zur Überwachung des Kodi Audioplayers einschalten"
 
 msgctxt "#30254"
 msgid "Activity time for wake up. Time must be long enough to perform a complete update of the EPG on the preferred update method"

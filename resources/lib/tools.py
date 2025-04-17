@@ -30,14 +30,14 @@ JSON_TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 LOCAL_TIME_FORMAT = '{} - {}'.format(xbmc.getRegion('dateshort'), xbmc.getRegion('time'))
 
 # binary Flags
-
-isPWR = 0b100000     # Poweroff requested
-isATF = 0b010000     # active Time Frame
-isNET = 0b001000     # Network is active
-isPRG = 0b000100     # Processes are active
-isREC = 0b000010     # Recording is or becomes active
-isEPG = 0b000001     # EPG grabbing is or becomes active
-isUSR = 0b000000     # default
+isAUD = 0b1000000     # Player plays audio
+isPWR = 0b0100000     # Poweroff requested
+isATF = 0b0010000     # active Time Frame
+isNET = 0b0001000     # Network is active
+isPRG = 0b0000100     # Processes are active
+isREC = 0b0000010     # Recording is or becomes active
+isEPG = 0b0000001     # EPG grabbing is or becomes active
+isUSR = 0b0000000     # default
 
 
 def setProperty(key, value):

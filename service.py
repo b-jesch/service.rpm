@@ -1,8 +1,11 @@
 import time
+
+import xbmc
 import xbmcvfs
 import socket
 import threading
 import stat
+
 from resources.lib.tools import *
 from resources.lib.settings import addon_settings
 
@@ -192,12 +195,17 @@ def getPwrStatus():
         return isPWR
     return isUSR
 
+def getPlayerStatus():
+    if Mon.setting['check_audioplayer'] and xbmc.getCondVisibility('Player.HasAudio') and \
+            (xbmc.getCondVisibility('Player.Playing') or xbmc.getCondVisibility('Player.Paused')): return isAUD
+    return isUSR
+
 def getStatusFlags(flags):
 
     _flags = isUSR | getPvrStatus() | getEpgStatus() | getProcessStatus() | getNetworkStatus() | \
-             getTimeFrameStatus() | getPwrStatus()
+             getTimeFrameStatus() | getPwrStatus() | getPlayerStatus()
     if _flags ^ flags:
-        log('Status changed: {:06b} (PWR/ATF/NET/PRG/REC/EPG)'.format(_flags), xbmc.LOGINFO)
+        log('Status changed: {:07b} (AUD/PWR/ATF/NET/PRG/REC/EPG)'.format(_flags), xbmc.LOGINFO)
     return _flags
 
 def checkShutdownProperty():
@@ -268,7 +276,7 @@ def service():
         flags = getStatusFlags(flags)
         if flags & isPWR:
 
-            if not flags & (isREC | isEPG | isPRG | isNET):
+            if not flags & (isREC | isEPG | isPRG | isNET | isAUD):
 
                 if not countDown(flags):
                     Mon.waitForShutdown = False
@@ -310,6 +318,8 @@ def service():
                     notify(loc(30015), loc(30023), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Network active'
                 elif flags & isATF:
                     notify(loc(30015), loc(30033), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Time Frame active'
+                elif flags & isAUD:
+                    notify(loc(30015), loc(30047), icon=xbmcgui.NOTIFICATION_WARNING)  # Notify 'Audio Player active'
                 setProperty('observe', 'True')
 
         walker = 20

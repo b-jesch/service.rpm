@@ -306,9 +306,13 @@
 						<heading>30039</heading>
 					</control>
 				</setting>
+				<setting help="30248" id="check_audioplayer" label="30048" type="boolean">
+					<level>0</level>
+					<default>false</default>
+					<control type="toggle"/>
+				</setting>
 			</group>
 		</category>
-
 		<category help="" id="epg" label="30053">
 			<group id="1">
 				<setting help="30261" id="epgtimer_interval" label="30061" type="integer">

@@ -147,7 +147,7 @@ def getEpgStatus():
         __next = time.mktime(time.localtime()) + (int(time.strftime('%j')) % Mon.setting['epgtimer_interval']) * 86400
         __n = datetime.fromtimestamp(__next).replace(hour=Mon.setting['epgtimer_time'],
                                                      minute=0, second=0, microsecond=0)
-        if not str2bool(getProperty('epg_exec_done')):
+        if not getProperty('epg_exec_done'):
             if datetime.timestamp(__n) - Mon.setting['margin_start'] - \
                     Mon.setting['margin_stop'] < \
                     time.mktime(time.localtime()) < datetime.timestamp(__n) + \
